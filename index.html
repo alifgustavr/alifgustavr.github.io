@@ -72,8 +72,8 @@
 					</div>
 					<div class="col-md-4">
 						<p>
-							I always crave to learn more through every project that I do. A communicative person who can adapt easily to new work environments, and then able to work in a team or individually. Adaptive is a cool thing, so here I am to
-							keep getting learn and learns all about the technology.
+							I always crave to learn more through every project that I do, within curiosity to make it from nothing to something. Besides that, I am a communicative person who can adapt easily to new work environments, and then able to
+							work in a team or individually. Adaptive is a cool thing, so here I am to keep getting learn and learns all about the technology.
 						</p>
 					</div>
 				</div>
@@ -92,7 +92,7 @@
 			<div class="container">
 				<div class="row text-center mb-3">
 					<div class="col">
-						<h2>My Album Gallery</h2>
+						<h2>My latest Projects</h2>
 					</div>
 				</div>
 				<div class="row justify-content-center">
@@ -157,20 +157,29 @@
 				</div>
 				<div class="row justify-content-center">
 					<div class="col-md-6">
-						<form>
+						<div class="alert alert-success alert-dismissible fade show d-none alert-ku" role="alert">
+							<strong>Thank You!</strong> The message has been sent.
+							<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+						</div>
+						<form name="feedbackFromMy">
 							<div class="mb-3">
 								<label for="name" class="form-label">Name</label>
-								<input type="name" class="form-control" id="name" aria-describedby="name" />
+								<input type="name" class="form-control" id="name" aria-describedby="name" name="nama" />
 							</div>
 							<div class="mb-3">
 								<label for="email" class="form-label">Email address</label>
-								<input type="email" class="form-control" id="email" aria-describedby="email" />
+								<input type="email" class="form-control" id="email" aria-describedby="email" name="email" />
 							</div>
 							<div class="mb-3">
 								<label for="message" class="form-label">Message</label>
-								<textarea class="form-control" id="mess" rows="3"></textarea>
+								<textarea class="form-control" id="mess" rows="3" name="pesan"></textarea>
 							</div>
-							<button type="submit" class="btn btn-primary">Kirim</button>
+							<button type="submit" class="btn btn-primary btn-kirim">Kirim</button>
+
+							<button class="btn btn-primary btn-loading d-none" type="button" disabled>
+								<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+								Mohon tunggu...
+							</button>
 						</form>
 					</div>
 				</div>
@@ -191,5 +200,28 @@
 		<!-- end of footer -->
 		<!-- <h1 class="text-center text-danger">Dumped in The Sky!</h1> -->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
+		<script>
+			const scriptURL = "https://script.google.com/macros/s/AKfycbx_QBh32c2iVV_rOzZ4ucWxptvW_bN6zrmSPat4p7EciS-0dc9lBLF7vxf6KA_JIGPa/exec";
+			const form = document.forms["feedbackFromMy"];
+			const btnKirim = document.querySelector(".btn-kirim");
+			const btnLoading = document.querySelector(".btn-loading");
+			const alertKu = document.querySelector(".alert-ku");
+
+			form.addEventListener("submit", (e) => {
+				e.preventDefault();
+				btnLoading.classList.toggle("d-none");
+				btnKirim.classList.toggle("d-none");
+				fetch(scriptURL, { method: "POST", body: new FormData(form) })
+					.then((response) => {
+						btnLoading.classList.toggle("d-none");
+						btnKirim.classList.toggle("d-none");
+						alertKu.classList.toggle("d-none");
+						form.reset();
+						console.log("Success!", response);
+					})
+					.catch((error) => console.error("Error!", error.message));
+			});
+		</script>
 	</body>
 </html>
