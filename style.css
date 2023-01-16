@@ -3,14 +3,27 @@
 } */
 
 .jumbotron {
-  padding-top: 6rem;
-  background-color: #94cdff;
+	padding-top: 6rem;
+	background-color: #58a5da;
 }
 
 #contents {
-  background-color: #94cdff;
+	background-color: #58a5da;
 }
 
 section {
-  padding-top: 5rem;
+	padding-top: 5rem;
+}
+
+.navbar {
+	background-color: #2e8ed1;
+}
+
+footer {
+	background-color: #58a5da;
+}
+
+.alert-ku {
+	color: white;
+	background-color: tomato;
 }
